@@ -276,7 +276,7 @@ func processOutputDuringContainerExecution(cli *client.Client, ctx context.Conte
 	statusCh, errCh := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
 
 	//Print all container logs
-	out, err := cli.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true, ShowStderr: true, Follow: true})
+	out, err := cli.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions{ShowStdout: false, ShowStderr: true, Follow: true})
 	if err != nil {
 		return fmt.Errorf("\nError getting container logs: %s", err)
 	}

@@ -29,22 +29,23 @@ module.exports = composeEnv([require("@kie-tools/root-env/env")], {
     },
     KN_PLUGIN_WORKFLOW__quarkusPlatformGroupId: {
       name: "KN_PLUGIN_WORKFLOW__quarkusPlatformGroupId",
-      default: "io.quarkus.platform",
+      default: "com.redhat.quarkus.platform",
       description: "Quarkus group to be used when creating the SonataFlow project",
     },
     KN_PLUGIN_WORKFLOW__quarkusVersion: {
       name: "KN_PLUGIN_WORKFLOW__quarkusVersion",
-      default: "2.16.10.Final",
+      default: "3.2.9.Final-redhat-00003",
       description: "Quarkus version to be used when creating the SonataFlow project",
     },
     KN_PLUGIN_WORKFLOW__devModeImage: {
       name: "KN_PLUGIN_WORKFLOW__devModeImage",
-      default: "quay.io/kiegroup/kogito-swf-devmode:1.44",
+      default:
+        "registry-proxy.engineering.redhat.com/rh-osbs/openshift-serverless-1-tech-preview-logic-swf-devmode-rhel8:1.32.0-1",
       description: "SonataFlow dev mode image (used on cli run)",
     },
     KN_PLUGIN_WORKFLOW__kogitoVersion: {
       name: "KN_PLUGIN_WORKFLOW__kogitoVersion",
-      default: "1.44.1.Final",
+      default: "9.99.0.redhat-00002",
       description: "Kogito version to be used when creating and converting to Quarkus Projects",
     },
   }),

@@ -1,6 +1,6 @@
 module github.com/apache/incubator-kie-tools/packages/kn-plugin-workflow
 
-go 1.21
+go 1.20
 
 replace github.com/apache/incubator-kie-kogito-serverless-operator/api v0.0.0 => github.com/apache/incubator-kie-kogito-serverless-operator/api v0.0.0-20240126134605-2b5056d12bb9
 
