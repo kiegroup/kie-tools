@@ -20,6 +20,7 @@
 package quarkus
 
 import (
+	"fmt"
 	"github.com/apache/incubator-kie-tools/packages/kn-plugin-workflow/pkg/metadata"
 	"os"
 	"testing"
@@ -28,10 +29,19 @@ import (
 func TestManipulatePom(t *testing.T) {
 
 	//setup
-	metadata.KogitoVersion = "1.42.0.Final"
+	metadata.KogitoVersion = "1.0.0.Final"
 
 	inputPath := "testdata/pom1-input.xml_no_auto_formatting"
 	expectedPath := "testdata/pom1-expected.xml_no_auto_formatting"
+
+	var deps = metadata.DependenciesVersion{
+		QuarkusPlatformGroupId: "org.quarkus.fake",
+		QuarkusVersion:         "0.0.1",
+	}
+
+	var cfg = CreateQuarkusProjectConfig{
+		DependenciesVersion: deps,
+	}
 
 	tempFile := "testdata/temp.xml"
 	err := copyFile(inputPath, tempFile)
@@ -40,7 +50,7 @@ func TestManipulatePom(t *testing.T) {
 	}
 	defer os.Remove(tempFile)
 
-	err = manipulatePomToKogito(tempFile)
+	err = manipulatePomToKogito(tempFile, cfg)
 	if err != nil {
 		t.Fatalf("Error manipulating XML: %v", err)
 	}
@@ -51,10 +61,12 @@ func TestManipulatePom(t *testing.T) {
 	}
 
 	expectedData, err := os.ReadFile(expectedPath)
+	var c = string(expectedData)
 	if err != nil {
+		fmt.Print(c)
 		t.Fatalf("Error reading expected XML: %v", err)
 	}
-
+	//fmt.Print(string(expectedData))
 	if string(modifiedData) != string(expectedData) {
 		t.Errorf("Manipulated XML does not match expected XML")
 	}
