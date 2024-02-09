@@ -34,7 +34,7 @@ module.exports = composeEnv([require("@kie-tools/root-env/env")], {
     },
     KN_PLUGIN_WORKFLOW__quarkusVersion: {
       name: "KN_PLUGIN_WORKFLOW__quarkusVersion",
-      default: "3.2.9.Final-redhat-00003",
+      default: "3.2.9.Final-redhat-00004",
       description: "Quarkus version to be used when creating the SonataFlow project",
     },
     KN_PLUGIN_WORKFLOW__devModeImage: {

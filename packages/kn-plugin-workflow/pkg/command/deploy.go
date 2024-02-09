@@ -21,13 +21,15 @@ package command
 
 import (
 	"fmt"
+
 	"github.com/apache/incubator-kie-tools/packages/kn-plugin-workflow/pkg/metadata"
+
+	"os"
+	"path"
 
 	"github.com/apache/incubator-kie-tools/packages/kn-plugin-workflow/pkg/common"
 	"github.com/ory/viper"
 	"github.com/spf13/cobra"
-	"os"
-	"path"
 )
 
 func NewDeployCommand() *cobra.Command {

@@ -19,6 +19,33 @@
 
 package metadata
 
+// Dependency represents a Maven dependency.
+type Dependency struct {
+	GroupId    string
+	ArtifactId string
+	Version    string
+	Type       string
+	Scope      string
+}
+
+var KogitoBomDependency = Dependency{
+	GroupId:    "org.kie.kogito",
+	ArtifactId: "kogito-bom",
+	Version:    "9.99.0.redhat-00002",
+	Type:       "pom",
+	Scope:      "import",
+}
+
+// KogitoDependencies defines the set of dependencies to be added to the pom.xml
+// of created and converted Quarkus projects.
+var KogitoDependencies = []Dependency{
+	{GroupId: "org.kie.kogito", ArtifactId: "kogito-addons-quarkus-knative-eventing"},
+	{GroupId: "org.kie.kogito", ArtifactId: "kogito-addons-quarkus-source-files"},
+	{GroupId: "org.kie.kogito", ArtifactId: "kogito-quarkus-serverless-workflow-devui"},
+	{GroupId: "org.kie.kogito", ArtifactId: "kogito-addons-quarkus-data-index-inmemory"},
+	{GroupId: "org.kie.kogito", ArtifactId: "kogito-quarkus-serverless-workflow"},
+}
+
 const (
 	QuarkusMavenPlugin                          = "quarkus-maven-plugin"
 	QuarkusKubernetesExtension                  = "quarkus-kubernetes"

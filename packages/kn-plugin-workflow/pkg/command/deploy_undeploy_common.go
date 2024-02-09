@@ -123,7 +123,6 @@ func generateManifests(cfg *DeployUndeployCmdConfig) error {
 	supportFileExtensions := []string{metadata.JSONExtension, metadata.YAMLExtension, metadata.YMLExtension}
 
 	fmt.Println("🔍 Looking for specs files...")
-
 	files, err = common.FindFilesWithExtensions(cfg.SpecsDir, supportFileExtensions)
 	if err != nil {
 		return fmt.Errorf("❌ ERROR: failed to get supportFiles directory: %w", err)
@@ -134,7 +133,6 @@ func generateManifests(cfg *DeployUndeployCmdConfig) error {
 	}
 
 	fmt.Println("🔍 Looking for schema files...")
-	fmt.Println(cfg.SchemasDir)
 	files, err = common.FindFilesWithExtensions(cfg.SchemasDir, supportFileExtensions)
 	if err != nil {
 		return fmt.Errorf("❌ ERROR: failed to get supportFiles directory: %w", err)
@@ -178,7 +176,7 @@ func generateManifests(cfg *DeployUndeployCmdConfig) error {
 		if err != nil {
 			return err
 		}
-		handler.AddResource(filepath.Base(subflow), specIO)
+		handler.AddResourceAt(filepath.Base(subflow), filepath.Base(cfg.SubflowsDir), specIO)
 	}
 
 	for _, supportFile := range cfg.SchemasFilesPath {
@@ -186,7 +184,7 @@ func generateManifests(cfg *DeployUndeployCmdConfig) error {
 		if err != nil {
 			return err
 		}
-		handler.AddResource(filepath.Base(supportFile), specIO)
+		handler.AddResourceAt(filepath.Base(supportFile), filepath.Base(cfg.SchemasDir), specIO)
 	}
 
 	for _, supportFile := range cfg.SpecsFilesPath {
@@ -194,7 +192,7 @@ func generateManifests(cfg *DeployUndeployCmdConfig) error {
 		if err != nil {
 			return err
 		}
-		handler.AddResource(filepath.Base(supportFile), specIO)
+		handler.AddResourceAt(filepath.Base(supportFile), filepath.Base(cfg.SpecsDir), specIO)
 	}
 
 	for _, dashboardFile := range cfg.DashboardsPath {

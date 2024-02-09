@@ -34,6 +34,7 @@ import (
 	"github.com/apache/incubator-kie-tools/packages/kn-plugin-workflow/pkg/metadata"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/docker/go-connections/nat"
@@ -184,23 +185,50 @@ func GracefullyStopTheContainerWhenInterrupted(containerTool string) {
 		os.Exit(0) // Exit the program gracefully
 	}()
 }
+
 func pullDockerImage(cli *client.Client, ctx context.Context) (io.ReadCloser, error) {
-	reader, err := cli.ImagePull(ctx, metadata.DevModeImage, types.ImagePullOptions{})
+	// Check if the image exists locally
+	imageFilters := filters.NewArgs()
+	imageFilters.Add("reference", metadata.DevModeImage)
+	images, err := cli.ImageList(ctx, types.ImageListOptions{Filters: imageFilters})
 	if err != nil {
-		return nil, fmt.Errorf("\nError pulling image: %s. Error is: %s", metadata.DevModeImage, err)
+		return nil, fmt.Errorf("error listing images: %s", err)
 	}
-	return reader, nil
+
+	// If the image is not found locally, pull it from the remote registry
+	if len(images) == 0 {
+		reader, err := cli.ImagePull(ctx, metadata.DevModeImage, types.ImagePullOptions{})
+		if err != nil {
+			return nil, fmt.Errorf("\nError pulling image: %s. Error is: %s", metadata.DevModeImage, err)
+		}
+		return reader, nil
+	}
+
+	return nil, nil
 }
 
 func processDockerImagePullLogs(reader io.ReadCloser) error {
 	for {
-		err := processDockerLog(reader)
+		err := waitToImageBeReady(reader)
 		if err == io.EOF {
 			break
 		} else if err != nil {
 			return fmt.Errorf("error decoding ImagePull JSON: %s", err)
 		}
 	}
+	return nil
+}
+
+func waitToImageBeReady(reader io.ReadCloser) error {
+	var message DockerLogMessage
+	decoder := json.NewDecoder(reader)
+	if err := decoder.Decode(&message); err != nil {
+		return err
+	}
+	if message.Status != "" {
+		fmt.Print(".")
+	}
+
 	return nil
 }
 
@@ -253,8 +281,11 @@ func runDockerContainer(portMapping string, path string) error {
 		return err
 	}
 
-	if err := processDockerImagePullLogs(reader); err != nil {
-		return err
+	if reader != nil {
+		fmt.Printf("\n⏳ Retrieving (%s), this could take some time...\n", metadata.DevModeImage)
+		if err := processDockerImagePullLogs(reader); err != nil {
+			return err
+		}
 	}
 
 	resp, err := createDockerContainer(cli, ctx, portMapping, path)
@@ -295,20 +326,6 @@ func processOutputDuringContainerExecution(cli *client.Client, ctx context.Conte
 		}
 	case <-statusCh:
 		//state of the container matches the condition, in our case WaitConditionNotRunning
-	}
-
-	return nil
-}
-
-func processDockerLog(reader io.ReadCloser) error {
-	var message DockerLogMessage
-	decoder := json.NewDecoder(reader)
-	if err := decoder.Decode(&message); err != nil {
-		return err
-	}
-
-	if message.Status != "" {
-		fmt.Println(message.Status)
 	}
 
 	return nil
