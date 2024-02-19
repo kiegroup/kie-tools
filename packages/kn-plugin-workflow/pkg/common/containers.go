@@ -28,6 +28,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"runtime"
 	"strings"
 	"syscall"
 
@@ -61,10 +62,10 @@ func getDockerClient() (*client.Client, error) {
 func GetContainerID(containerTool string) (string, error) {
 
 	switch containerTool {
-	case Docker:
-		return getDockerContainerID()
 	case Podman:
 		return getPodmanContainerID()
+	case Docker:
+		return getDockerContainerID()
 	default:
 		return "", fmt.Errorf("no matching container type found")
 	}
@@ -76,10 +77,13 @@ func getPodmanContainerID() (string, error) {
 		"-a",
 		"--filter",
 		fmt.Sprintf("ancestor=%s", metadata.DevModeImage),
+		"--filter",
+		"status=running",
 		"--format", "{{.ID}}")
+	fmt.Println(cmd)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return "", fmt.Errorf("error getting container id: %w", err)
+		return "", fmt.Errorf("error getting podman container id: %w", err)
 	}
 	containerID := strings.TrimSpace(string(output))
 	return containerID, nil
@@ -130,20 +134,29 @@ func StopContainer(containerTool string, containerID string) error {
 	return nil
 }
 
+func resolveVolumeBindPath(containerTool string) string {
+	if containerTool == "podman" && runtime.GOOS == "linux" {
+		return metadata.VolumeBindPathSELinux
+	}
+	return metadata.VolumeBindPath
+}
+
 func RunContainerCommand(containerTool string, portMapping string, path string) error {
+	volumeBindPath := resolveVolumeBindPath(containerTool)
 	fmt.Printf("🔎 Warming up SonataFlow containers (%s), this could take some time...\n", metadata.DevModeImage)
 	if containerTool == Podman {
+		c := exec.Command(
+			containerTool,
+			"run",
+			"--rm",
+			"-p",
+			fmt.Sprintf("%s:8080", portMapping),
+			"-v",
+			fmt.Sprintf("%s:%s", path, volumeBindPath),
+			fmt.Sprintf("%s", metadata.DevModeImage),
+		)
 		if err := RunCommand(
-			exec.Command(
-				containerTool,
-				"run",
-				"--rm",
-				"-p",
-				fmt.Sprintf("%s:8080", portMapping),
-				"-v",
-				fmt.Sprintf("%s:%s", path, metadata.VolumeBindPath),
-				fmt.Sprintf("%s", metadata.DevModeImage),
-			),
+			c,
 			"container run",
 		); err != nil {
 			return err
@@ -164,7 +177,6 @@ func GracefullyStopTheContainerWhenInterrupted(containerTool string) {
 
 	go func() {
 		<-c // Wait for the interrupt signal
-
 		containerID, err := GetContainerID(containerTool)
 		if err != nil {
 			fmt.Printf("\nerror getting container id: %v\n", err)
