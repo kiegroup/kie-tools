@@ -39,8 +39,7 @@ module.exports = composeEnv([require("@kie-tools/root-env/env")], {
     },
     KN_PLUGIN_WORKFLOW__devModeImage: {
       name: "KN_PLUGIN_WORKFLOW__devModeImage",
-      default:
-        "registry-proxy.engineering.redhat.com/rh-osbs/openshift-serverless-1-tech-preview-logic-swf-devmode-rhel8:1.32.0-1",
+      default: "registry.redhat.io/openshift-serverless-1-tech-preview/logic-swf-devmode-rhel8:1.32.0",
       description: "SonataFlow dev mode image (used on cli run)",
     },
     KN_PLUGIN_WORKFLOW__kogitoVersion: {
