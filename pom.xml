@@ -183,13 +183,13 @@
             </configuration>
           </execution>
           <execution>
-            <id>pnpm bootstrap</id>
+            <id>pnpm bootstrap sonataflow-quarkus-devui</id>
             <goals>
               <goal>pnpm</goal>
             </goals>
             <configuration>
               <skip>${skip.ui.deps}</skip>
-              <arguments>bootstrap</arguments>
+              <arguments>bootstrap -F @kie-tools/sonataflow-quarkus-devui...</arguments>
             </configuration>
           </execution>
         </executions>
