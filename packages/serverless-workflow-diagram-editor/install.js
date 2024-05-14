@@ -24,6 +24,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const download = require("mvn-artifact-download").default;
 const AdmZip = require("adm-zip");
+const { ProxyAgent } = require("proxy-agent");
 
 const stunner_lienzo_path = "kie-wb-common-stunner/kie-wb-common-stunner-client/kie-wb-common-stunner-lienzo/";
 const tempPath = stunner_lienzo_path + "target/external-deps";
@@ -148,16 +149,18 @@ async function prepareFolders() {
 async function processMavenDependencies() {
   await prepareFolders(tempPath);
   artifacts.forEach((resources, artifact) => {
-    download(artifact, tempPath).then((jarPath) => {
-      var zip = new AdmZip(jarPath);
-      resources.forEach((resource) => {
-        let fileName = path.basename(resource.path);
-        if (resource.type === "js") {
-          zip.extractEntryTo(resource.path, resources_path + "/js/", false, true, false, fileName + ".noproc");
-        } else if (resource.type === "css") {
-          zip.extractEntryTo(resource.path, resources_path + "/css/", false, true);
-        }
-      });
-    });
+    download(artifact, tempPath, undefined, undefined, { agent: new ProxyAgent(process.env.npm_config_proxy) }).then(
+      (jarPath) => {
+        var zip = new AdmZip(jarPath);
+        resources.forEach((resource) => {
+          let fileName = path.basename(resource.path);
+          if (resource.type === "js") {
+            zip.extractEntryTo(resource.path, resources_path + "/js/", false, true, false, fileName + ".noproc");
+          } else if (resource.type === "css") {
+            zip.extractEntryTo(resource.path, resources_path + "/css/", false, true);
+          }
+        });
+      }
+    );
   });
 }

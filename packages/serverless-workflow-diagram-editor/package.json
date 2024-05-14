@@ -33,6 +33,7 @@
     "adm-zip": "^0.5.10",
     "cpr": "^3.0.1",
     "mvn-artifact-download": "6.1.1",
+    "proxy-agent": "^6.4.0",
     "rimraf": "^3.0.2",
     "run-script-os": "^1.1.6",
     "symlink-dir": "^5.0.1"
