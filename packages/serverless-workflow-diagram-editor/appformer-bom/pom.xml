@@ -73,6 +73,7 @@
   <properties>
     <sonar.skip>true</sonar.skip>
     <version.j2cl.tools>0.1</version.j2cl.tools>
+    <version.deploy.plugin>2.8.2</version.deploy.plugin>
   </properties>
 
   <dependencyManagement>
@@ -353,4 +354,15 @@
     </dependencies>
   </dependencyManagement>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${version.deploy.plugin}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

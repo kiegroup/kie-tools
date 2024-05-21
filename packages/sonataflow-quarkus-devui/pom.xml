@@ -95,7 +95,8 @@
             </goals>
             <configuration>
               <skip>${skip.ui.build}</skip>
-              <arguments>-F serverless-workflow-dev-ui-webapp... !@kie-tools/dmn-marshaller-backend-compatibility-tester build:prod</arguments>
+	      <pnpmInheritsProxyConfigFromMaven>false</pnpmInheritsProxyConfigFromMaven>
+              <arguments>-F serverless-workflow-dev-ui-webapp... -F !@kie-tools/dmn-marshaller-backend-compatibility-tester -F !@kie-tools/dmn-testing-models build:prod</arguments>
               <environmentVariables>
                 <KIE_TOOLS_BUILD__runTests>false</KIE_TOOLS_BUILD__runTests>
                 <KIE_TOOLS_BUILD__runIntegrationTests>false</KIE_TOOLS_BUILD__runIntegrationTests>

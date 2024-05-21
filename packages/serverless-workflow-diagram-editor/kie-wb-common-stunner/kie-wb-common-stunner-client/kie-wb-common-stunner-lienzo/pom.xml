@@ -172,7 +172,8 @@
             <executions>
                 <execution>
                     <id>unpack-external-dependencies</id>
-                    <phase>generate-resources</phase>
+                    <!-- Please use generate-sources instead of generate-resources to download the libraries before the build  -->
+                    <phase>generate-sources</phase>
                     <goals>
                         <goal>unpack</goal>
                     </goals>
@@ -216,7 +217,8 @@
             <executions>
                 <execution>
                     <id>rename-files</id>
-                    <phase>process-resources</phase>
+                    <!-- Please use process-sources instead of process-resources to process the libraries before the build  -->
+                    <phase>process-sources</phase>
                     <goals>
                         <goal>rename</goal>
                     </goals>
