@@ -4,9 +4,9 @@ go 1.21
 
 toolchain go1.21.6
 
-replace github.com/apache/incubator-kie-tools/packages/kogito-serverless-operator/api v0.0.0 => ./node_modules/@kie-tools/kogito-serverless-operator/api
+replace github.com/apache/incubator-kie-tools/packages/kogito-serverless-operator/api v0.0.0 => ../kogito-serverless-operator/api
 
-replace github.com/apache/incubator-kie-tools/packages/kogito-serverless-operator/workflowproj v0.0.0 => ./node_modules/@kie-tools/kogito-serverless-operator/workflowproj
+replace github.com/apache/incubator-kie-tools/packages/kogito-serverless-operator/workflowproj v0.0.0 => ../kogito-serverless-operator/workflowproj
 
 require (
 	github.com/apache/incubator-kie-tools/packages/kogito-serverless-operator/workflowproj v0.0.0
