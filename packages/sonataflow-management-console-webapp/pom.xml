@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~ 
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~ 
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.      
+-->
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+  <parent>
+    <groupId>org.apache.kie.sonataflow</groupId>
+    <artifactId>kie-tools-packages</artifactId>
+    <version>999-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.apache.kie.sonataflow</groupId>
+  <artifactId>sonataflow-management-console-webapp</artifactId>
+
+  <name>KIE Tools :: SonataFlow Management Console Webapp</name>
+
+  <packaging>pom</packaging>
+
+  <properties>
+    <project.build.outputTimestamp>2024-01-12T00:00:00Z</project.build.outputTimestamp>
+    <java.module.name>org.kie.sonataflow.management.console.webapp</java.module.name>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <inherited>false</inherited>
+        <configuration>
+          <workingDirectory>../../</workingDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>pnpm build:prod</id>
+            <goals>
+              <goal>pnpm</goal>
+            </goals>
+            <configuration>
+              <skip>${skip.ui.build}</skip>
+              <pnpmInheritsProxyConfigFromMaven>false</pnpmInheritsProxyConfigFromMaven>
+              <arguments
+              >-F sonataflow-management-console-webapp... -F !@kie-tools/dmn-marshaller-backend-compatibility-tester -F !@kie-tools/dmn-testing-models build:prod</arguments>
+              <environmentVariables>
+                <KIE_TOOLS_BUILD__runTests>false</KIE_TOOLS_BUILD__runTests>
+                <KIE_TOOLS_BUILD__runIntegrationTests>false</KIE_TOOLS_BUILD__runIntegrationTests>
+              </environmentVariables>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
