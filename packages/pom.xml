@@ -18,5 +18,6 @@
 
   <modules>
     <module>sonataflow-quarkus-devui</module>
+    <module>sonataflow-management-console-webapp</module>
   </modules>
 </project>
