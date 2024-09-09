@@ -66,8 +66,30 @@
               <environmentVariables>
                 <KIE_TOOLS_BUILD__runTests>false</KIE_TOOLS_BUILD__runTests>
                 <KIE_TOOLS_BUILD__runIntegrationTests>false</KIE_TOOLS_BUILD__runIntegrationTests>
+                <SONATAFLOW_MANAGEMENT_CONSOLE_WEBAPP__sonataflowEnvMode
+                >true</SONATAFLOW_MANAGEMENT_CONSOLE_WEBAPP__sonataflowEnvMode>
               </environmentVariables>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/assembly/image-build-zip.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>zip-dist-folder</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
