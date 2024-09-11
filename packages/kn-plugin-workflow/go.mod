@@ -4,9 +4,9 @@ go 1.21
 
 toolchain go1.21.6
 
-replace github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api v0.0.0 => ./node_modules/@kie-tools/sonataflow-operator/api
+replace github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api v0.0.0 => ../sonataflow-operator/api
 
-replace github.com/apache/incubator-kie-tools/packages/sonataflow-operator/workflowproj v0.0.0 => ./node_modules/@kie-tools/sonataflow-operator/workflowproj
+replace github.com/apache/incubator-kie-tools/packages/sonataflow-operator/workflowproj v0.0.0 => ../sonataflow-operator/workflowproj
 
 require (
 	github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api v0.0.0
