@@ -185,14 +185,14 @@
             </configuration>
           </execution>
           <execution>
-            <id>pnpm bootstrap sonataflow-quarkus-devui sonataflow-management-console-webapp</id>
+            <id>pnpm bootstrap sonataflow-quarkus-devui sonataflow-management-console-image</id>
             <goals>
               <goal>pnpm</goal>
             </goals>
             <configuration>
               <skip>${skip.ui.deps}</skip>
               <arguments
-              >bootstrap -F @kie-tools/sonataflow-quarkus-devui... -F @kie-tools/sonataflow-management-console-webapp...</arguments>
+              >bootstrap -F @kie-tools/sonataflow-quarkus-devui... -F @kie-tools/sonataflow-management-console-image...</arguments>
             </configuration>
           </execution>
         </executions>
