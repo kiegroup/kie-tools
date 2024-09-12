@@ -30,10 +30,18 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <fileSets>
     <fileSet>
-      <directory>dist</directory>
-      <outputDirectory>/</outputDirectory>
+      <directory>dist-dev/sonataflow-management-console-webapp</directory>
+      <outputDirectory>/app</outputDirectory>
       <includes>
         <include>**/*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>dist-dev</directory>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>image-env-to-json-standalone</include>
+        <include>EnvJson.schema.json</include>
       </includes>
     </fileSet>
   </fileSets>
