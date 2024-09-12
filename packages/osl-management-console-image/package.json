@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "name": "@redhat/osl-management-console-image",
+  "version": "0.0.0",
+  "description": "Red Hat OpenShift Serverless Logic Management Console Image",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/kiegroup/kie-tools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kiegroup/kie-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kiegroup/kie-tools/issues"
+  },
+  "scripts": {
+    "build:dev": "pnpm cleanup && pnpm env-json:schema:generate && pnpm copy:assets && run-script-if --bool \"$(build-env containerImages.build)\" --then \"pnpm image:cekit:build\"",
+    "build:prod": "pnpm cleanup && pnpm env-json:schema:generate && pnpm copy:assets && run-script-if --bool \"$(build-env containerImages.build)\" --then \"pnpm image:cekit:build\"",
+    "cleanup": "rimraf dist-dev && mkdir dist-dev",
+    "copy:assets": "pnpm copy:image-env-to-json",
+    "copy:image-env-to-json": "run-script-os",
+    "copy:image-env-to-json:linux:darwin": "cp ./node_modules/@kie-tools/image-env-to-json/dist/linux/image-env-to-json-standalone ./dist-dev/",
+    "env-json:schema:generate": "ts-json-schema-generator --tsconfig ./node_modules/@kie-tools/sonataflow-management-console-webapp/tsconfig.json --path ./node_modules/@kie-tools/sonataflow-management-console-webapp/src/env/EnvJson.ts --type EnvJson --id EnvJson --out ./dist-dev/EnvJson.schema.json",
+    "image:cekit:build": "run-script-os",
+    "image:cekit:build:linux:darwin": "pnpm image:cekit:copy && pnpm image:cekit:cache:artifacts && pnpm image:cekit:setup:env make -C ./dist-dev build",
+    "image:cekit:build:win32": "echo \"Build skipped on macOS and Windows\"",
+    "image:cekit:cache:artifacts": ". ./node_modules/@kie-tools/python-venv/venv/bin/activate && . ./dist-dev/scripts/process-cekit-artifact.sh $(build-env oslManagementConsoleImage.artifactUrl)",
+    "image:cekit:copy": "cp -R ./node_modules/@kie-tools/sonataflow-image-common/resources/* ./dist-dev/ && cp -R resources/* ./dist-dev/ && pnpm image:cekit:copy-modules",
+    "image:cekit:copy-modules": "rsync -av --exclude='module.yaml' node_modules/@kie-tools/sonataflow-management-console-image/resources/modules/sonataflow/management-console/ dist-dev/modules/osl/management-console",
+    "image:cekit:setup:env": ". ./node_modules/@kie-tools/python-venv/venv/bin/activate && cross-env SWF_IMAGE_REGISTRY=$(build-env sonataflowManagementConsoleImageEnv.registry) SWF_IMAGE_REGISTRY_ACCOUNT=$(build-env sonataflowManagementConsoleImageEnv.account) SWF_IMAGE_NAME=$(build-env sonataflowManagementConsoleImageEnv.name) SWF_IMAGE_TAG=$(build-env sonataflowManagementConsoleImageEnv.buildTag) QUARKUS_PLATFORM_VERSION=$(build-env quarkusPlatform.version) KOGITO_VERSION=$(build-env kogitoRuntime.version) SONATAFLOW_MANAGEMENT_CONSOLE_PORT=$(build-env sonataflowManagementConsoleImageEnv.port)"
+  },
+  "devDependencies": {
+    "@kie-tools/image-env-to-json": "workspace:*",
+    "@kie-tools/python-venv": "workspace:*",
+    "@kie-tools/root-env": "workspace:*",
+    "@kie-tools/sonataflow-image-common": "workspace:*",
+    "@kie-tools/sonataflow-management-console-image": "workspace:*",
+    "@kie-tools/sonataflow-management-console-image-env": "workspace:*",
+    "@kie-tools/sonataflow-management-console-webapp": "workspace:*",
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "run-script-os": "^1.1.6",
+    "ts-json-schema-generator": "^1.1.2"
+  }
+}

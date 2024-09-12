@@ -6528,6 +6528,42 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
 
+  packages/osl-management-console-image:
+    devDependencies:
+      '@kie-tools/image-env-to-json':
+        specifier: workspace:*
+        version: link:../image-env-to-json
+      '@kie-tools/python-venv':
+        specifier: workspace:*
+        version: link:../python-venv
+      '@kie-tools/root-env':
+        specifier: workspace:*
+        version: link:../root-env
+      '@kie-tools/sonataflow-image-common':
+        specifier: workspace:*
+        version: link:../sonataflow-image-common
+      '@kie-tools/sonataflow-management-console-image':
+        specifier: workspace:*
+        version: link:../sonataflow-management-console-image
+      '@kie-tools/sonataflow-management-console-image-env':
+        specifier: workspace:*
+        version: link:../sonataflow-management-console-image-env
+      '@kie-tools/sonataflow-management-console-webapp':
+        specifier: workspace:*
+        version: link:../sonataflow-management-console-webapp
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
+      rimraf:
+        specifier: ^3.0.2
+        version: 3.0.2
+      run-script-os:
+        specifier: ^1.1.6
+        version: 1.1.6
+      ts-json-schema-generator:
+        specifier: ^1.1.2
+        version: 1.1.2
+
   packages/patternfly-base:
     devDependencies:
       '@kie-tools/root-env':
@@ -56504,7 +56540,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       commander: 9.4.1
       glob: 8.1.0
-      json5: 2.2.1
+      json5: 2.2.3
       normalize-path: 3.0.0
       safe-stable-stringify: 2.4.1
       typescript: 4.8.4

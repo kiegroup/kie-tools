@@ -153,6 +153,11 @@
       { "id": "@kie-tools/sonataflow-builder-image" },
       { "id": "@kie-tools/sonataflow-devmode-image" },
       { "id": "@kie-tools/unitables" },
+      { "id": "@redhat/osl-management-console-image" },
+      { "id": "@kie-tools/sonataflow-management-console-image" },
+      { "id": "@kie-tools/sonataflow-image-common" },
+      { "id": "@kie-tools/sonataflow-management-console-image-env" },
+      { "id": "@kie-tools/sonataflow-management-console-webapp" },
       { "id": "pmml-vscode-extension" },
       { "id": "@kie-tools/python-venv" },
       { "id": "@kie-tools/runtime-tools-components" },
@@ -178,7 +183,6 @@
       { "id": "@kie-tools/serverless-logic-web-tools-base-builder-image" },
       { "id": "@kie-tools/serverless-logic-web-tools-swf-builder-image" },
       { "id": "sonataflow-deployment-webapp" },
-      { "id": "@kie-tools/sonataflow-image-common" },
       {
         "id": "@kie-tools/serverless-logic-web-tools-swf-deployment-quarkus-app"
       },
@@ -190,9 +194,6 @@
       { "id": "@kie-tools/serverless-workflow-jq-expressions" },
       { "id": "@kie-tools/serverless-workflow-service-catalog" },
       { "id": "swf-vscode-extension" },
-      { "id": "@kie-tools/sonataflow-management-console-image" },
-      { "id": "@kie-tools/sonataflow-management-console-image-env" },
-      { "id": "@kie-tools/sonataflow-management-console-webapp" },
       { "id": "vscode-extension-dashbuilder-editor" },
       { "id": "vscode-extension-kie-ba-bundle" },
       { "id": "vscode-extension-kogito-bundle" },
@@ -1927,6 +1928,71 @@
         "weight": 1
       },
       {
+        "source": "@redhat/osl-management-console-image",
+        "target": "@kie-tools/sonataflow-management-console-image",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-image",
+        "target": "@kie-tools/image-env-to-json",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-image",
+        "target": "@kie-tools/sonataflow-image-common",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-image",
+        "target": "@kie-tools/sonataflow-management-console-image-env",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-image",
+        "target": "@kie-tools/sonataflow-management-console-webapp",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-image-common",
+        "target": "@kie-tools/python-venv",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-image-common",
+        "target": "@kie-tools/root-env",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-image-env",
+        "target": "@kie-tools/root-env",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-webapp",
+        "target": "@kie-tools-core/react-hooks",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-webapp",
+        "target": "@kie-tools/runtime-tools-process-webapp-components",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-webapp",
+        "target": "@kie-tools/runtime-tools-shared-webapp-components",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-webapp",
+        "target": "@kie-tools/runtime-tools-swf-webapp-components",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/sonataflow-management-console-webapp",
+        "target": "@kie-tools/sonataflow-dev-app",
+        "weight": 1
+      },
+      {
         "source": "pmml-vscode-extension",
         "target": "@kie-tools-core/vscode-extension",
         "weight": 1
@@ -2242,16 +2308,6 @@
         "weight": 1
       },
       {
-        "source": "@kie-tools/sonataflow-image-common",
-        "target": "@kie-tools/python-venv",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-image-common",
-        "target": "@kie-tools/root-env",
-        "weight": 1
-      },
-      {
         "source": "@kie-tools/serverless-logic-web-tools-swf-deployment-quarkus-app",
         "target": "@kie-tools/sonataflow-quarkus-devui",
         "weight": 1
@@ -2334,56 +2390,6 @@
       {
         "source": "swf-vscode-extension",
         "target": "@kie-tools/vscode-extension-common-test-helpers",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-image",
-        "target": "@kie-tools/image-env-to-json",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-image",
-        "target": "@kie-tools/sonataflow-image-common",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-image",
-        "target": "@kie-tools/sonataflow-management-console-image-env",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-image",
-        "target": "@kie-tools/sonataflow-management-console-webapp",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-image-env",
-        "target": "@kie-tools/root-env",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-webapp",
-        "target": "@kie-tools-core/react-hooks",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-webapp",
-        "target": "@kie-tools/runtime-tools-process-webapp-components",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-webapp",
-        "target": "@kie-tools/runtime-tools-shared-webapp-components",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-webapp",
-        "target": "@kie-tools/runtime-tools-swf-webapp-components",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/sonataflow-management-console-webapp",
-        "target": "@kie-tools/sonataflow-dev-app",
         "weight": 1
       },
       {
@@ -2574,6 +2580,7 @@
     ["@kie-tools-core/notifications", "packages/notifications"],
     ["@kie-tools/online-editor", "packages/online-editor"],
     ["@kie-tools-core/operating-system", "packages/operating-system"],
+    ["@redhat/osl-management-console-image", "packages/osl-management-console-image"],
     ["@kie-tools-core/patternfly-base", "packages/patternfly-base"],
     ["@kie-tools/playwright-base", "packages/playwright-base"],
     ["@kie-tools/pmml-editor", "packages/pmml-editor"],
