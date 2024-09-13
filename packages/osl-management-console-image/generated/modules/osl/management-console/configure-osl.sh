@@ -21,6 +21,6 @@ set -e
 
 MGMT_CONSOLE_HOME="${KOGITO_HOME}/management-console"
 
-cd ${MGMT_CONSOLE_HOME}/app
+cd "${MGMT_CONSOLE_HOME}/app"
 unzip -q "sonataflow-management-console-webapp-image-build.zip"
 rm -rf "sonataflow-management-console-webapp-image-build.zip"

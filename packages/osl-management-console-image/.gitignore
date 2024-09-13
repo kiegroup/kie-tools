@@ -3,4 +3,4 @@ target
 generated/tests
 generated/scripts
 generated/Makefile
-
+generated/**/tests/
