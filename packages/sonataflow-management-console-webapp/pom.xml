@@ -32,15 +32,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.kie.sonataflow</groupId>
-  <artifactId>sonataflow-management-console-image</artifactId>
+  <artifactId>sonataflow-management-console-webapp</artifactId>
 
-  <name>KIE Tools :: SonataFlow Management Console Image</name>
+  <name>KIE Tools :: SonataFlow Management Console Webapp</name>
 
   <packaging>pom</packaging>
 
   <properties>
     <project.build.outputTimestamp>2024-01-12T00:00:00Z</project.build.outputTimestamp>
-    <java.module.name>org.kie.sonataflow.management.console.image</java.module.name>
+    <java.module.name>org.kie.sonataflow.management.console.webapp</java.module.name>
   </properties>
 
   <build>
@@ -62,7 +62,7 @@
               <skip>${skip.ui.build}</skip>
               <pnpmInheritsProxyConfigFromMaven>false</pnpmInheritsProxyConfigFromMaven>
               <arguments
-              >-F sonataflow-management-console-image... -F !@kie-tools/dmn-marshaller-backend-compatibility-tester -F !@kie-tools/dmn-testing-models build:prod</arguments>
+              >-F sonataflow-management-console-webapp... -F !@kie-tools/dmn-marshaller-backend-compatibility-tester -F !@kie-tools/dmn-testing-models build:prod</arguments>
               <environmentVariables>
                 <KIE_TOOLS_BUILD__runTests>false</KIE_TOOLS_BUILD__runTests>
                 <KIE_TOOLS_BUILD__runIntegrationTests>false</KIE_TOOLS_BUILD__runIntegrationTests>
