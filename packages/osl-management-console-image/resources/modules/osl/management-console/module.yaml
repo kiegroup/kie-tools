@@ -35,3 +35,9 @@ artifacts:
     dest: /home/kogito/management-console/app
     target: sonataflow-management-console-webapp-image-build.zip
     md5: "## UPDATED DURING BUILD ##"
+  - name: image-env-to-json-standalone
+    path: "image-env-to-json-standalone"
+    dest: /home/kogito/management-console
+  - name: EnvJson.schema.json
+    path: "EnvJson.schema.json"
+    dest: /home/kogito/management-console

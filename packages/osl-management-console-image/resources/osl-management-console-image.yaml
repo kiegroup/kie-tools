@@ -44,7 +44,6 @@
       - path: modules
     install:
       - name: org.kie.kogito.system.user
-      - name: org.kie.kogito.logging
       - name: org.kie.kogito.project.versions
       - name: com.redhat.osl.management.console
 
