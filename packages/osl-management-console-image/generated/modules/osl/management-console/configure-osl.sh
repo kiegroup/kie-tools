@@ -19,8 +19,15 @@
 #
 set -e
 
+SCRIPT_DIR=$(dirname "${0}")
 MGMT_CONSOLE_HOME="${KOGITO_HOME}/management-console"
 
+# Add the generated files that can't be downloaded on Cpaas
+cd "${MGMT_CONSOLE_HOME}"
+cp -v "${SCRIPT_DIR}/added/EnvJson.schema.json" "${MGMT_CONSOLE_HOME}"
+cp -v "${SCRIPT_DIR}/added/image-env-to-json-standalone" "${MGMT_CONSOLE_HOME}"
+
+# Unzip the app
 cd "${MGMT_CONSOLE_HOME}/app"
 unzip -q "sonataflow-management-console-webapp-image-build.zip"
 rm -rf "sonataflow-management-console-webapp-image-build.zip"

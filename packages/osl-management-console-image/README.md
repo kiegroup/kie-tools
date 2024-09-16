@@ -15,6 +15,7 @@ Internally, the package will run a few preparation scritps to:
 Export the following variables before running it:
 
 ```shell
+export KIE_TOOLS_BUILD__buildContainerImages=true
 # The SonataFlow Management Console WebApp artifact in zip format
 export OSL_MANAGEMENT_CONSOLE_IMAGE__artifactUrl=<artifact URL>
 # Image name/tag information. This information is optional, you can see the package sonataflow-management-console-image-env for the default values.
