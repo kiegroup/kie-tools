@@ -62,6 +62,9 @@
     cmd:
       - "/home/kogito/management-console/launch/entrypoint.sh"
 
+  packages:
+    content_sets_file: content_sets.yaml
+
   osbs:
     configuration:
       container:
