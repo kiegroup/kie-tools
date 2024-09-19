@@ -45,7 +45,7 @@ var KogitoDependencies = []Dependency{
 	{GroupId: "org.kie", ArtifactId: "kogito-addons-quarkus-data-index-inmemory"},
 	{GroupId: "org.kie", ArtifactId: "kogito-addons-quarkus-jobs-service-embedded"},
 	{GroupId: "org.apache.kie.sonataflow", ArtifactId: "sonataflow-quarkus"},
-	{GroupId: "org.apache.kie.sonataflow", ArtifactId: "sonataflow-quarkus-devui", Version: "${kie.tooling.version}"},
+	{GroupId: "org.apache.kie.sonataflow", ArtifactId: "sonataflow-quarkus-devui", Version: KogitoVersion},
 }
 
 // requared crds for sonataflow
