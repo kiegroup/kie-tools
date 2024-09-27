@@ -44,4 +44,8 @@ cp -v "${SCRIPT_DIR}"/added/* "${MGMT_CONSOLE_HOME}"/launch
 chmod +x "${MGMT_CONSOLE_HOME}/launch/entrypoint.sh" "${MGMT_CONSOLE_HOME}/image-env-to-json-standalone"
 chown -R "${USER_ID}" "${MGMT_CONSOLE_HOME}"
 
+# Fixing /var/www permissions
+chgrp -R 0 /var/log/httpd /var/run/httpd /var/www/html /management-console \
+chmod -R g=u /var/log/httpd /var/run/httpd /var/www/html /management-console \
+
  if [ -f "${MGMT_CONSOLE_HOME}/app/env.json" ]; then chmod a+w "${MGMT_CONSOLE_HOME}/app/env.json"; fi
