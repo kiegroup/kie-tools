@@ -46,7 +46,7 @@ chown -R "${USER_ID}" "${MGMT_CONSOLE_HOME}"
 
 
 # Fixing /var/www permissions
-chgrp -R 0 ${HTTPD_LOG_PATH} ${HTTPD_VAR_RUN} ${HTTPD_DATA_PATH}/html /management-console \
-chmod -R g=u ${HTTPD_LOG_PATH} ${HTTPD_VAR_RUN} ${HTTPD_DATA_PATH}/html /management-console \
+chgrp -R 0 ${HTTPD_LOG_PATH} ${HTTPD_VAR_RUN} ${HTTPD_DATA_PATH}/html 
+chmod -R g=u ${HTTPD_LOG_PATH} ${HTTPD_VAR_RUN} ${HTTPD_DATA_PATH}/html 
 
  if [ -f "${MGMT_CONSOLE_HOME}/app/env.json" ]; then chmod a+w "${MGMT_CONSOLE_HOME}/app/env.json"; fi
