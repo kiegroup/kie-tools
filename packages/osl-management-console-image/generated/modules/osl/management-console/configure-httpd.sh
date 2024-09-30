@@ -44,20 +44,4 @@ cp -v "${SCRIPT_DIR}"/added/* "${MGMT_CONSOLE_HOME}"/launch
 chmod +x "${MGMT_CONSOLE_HOME}/launch/entrypoint.sh" "${MGMT_CONSOLE_HOME}/image-env-to-json-standalone"
 chown -R "${USER_ID}" "${MGMT_CONSOLE_HOME}"
 
-ENV HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
-    HTTPD_APP_ROOT=${APP_ROOT} \
-    HTTPD_CONFIGURATION_PATH=${APP_ROOT}/etc/httpd.d \
-    HTTPD_MAIN_CONF_PATH=/etc/httpd/conf \
-    HTTPD_MAIN_CONF_MODULES_D_PATH=/etc/httpd/conf.modules.d \
-    HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d \
-    HTTPD_TLS_CERT_PATH=/etc/httpd/tls \
-    HTTPD_VAR_RUN=/var/run/httpd \
-    HTTPD_DATA_PATH=/var/www \
-    HTTPD_DATA_ORIG_PATH=/var/www \
-    HTTPD_LOG_PATH=/var/log/httpd
-
-# Fixing /var/www permissions
-chgrp -R 0 /var/log/httpd /var/run/httpd /var/www/html /management-console \
-chmod -R g=u /var/log/httpd /var/run/httpd /var/www/html /management-console \
-
  if [ -f "${MGMT_CONSOLE_HOME}/app/env.json" ]; then chmod a+w "${MGMT_CONSOLE_HOME}/app/env.json"; fi

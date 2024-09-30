@@ -25,7 +25,7 @@
     - name: "io.quarkus.platform.version"
       value: "3.8.6"
     - name: "org.kie.kogito.version"
-      value: "9.101-redhat"
+      value: "999-20240905-SNAPSHOT"
     - name: "maintainer"
       value: "Red Hat <serverless-logic-team@redhat.com>"
     - name: "io.k8s.description"
