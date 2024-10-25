@@ -60,7 +60,7 @@
     <version.npm>6.10.3</version.npm>
     <version.pnpm>9.3.0</version.pnpm>
 
-    <quarkus.platform.version>3.2.10.Final</quarkus.platform.version>
+    <version.quarkus>3.8.6</version.quarkus>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
   </properties>
 
@@ -69,7 +69,7 @@
       <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.platform.version}</version>
+        <version>${version.quarkus}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

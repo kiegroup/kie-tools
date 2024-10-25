@@ -24,8 +24,6 @@ setupMavenConfigFile(
   `
     -Drevision=${env.mavenBase.version}
     -Dmaven.repo.local.tail=${buildTailFromPackageJsonDependencies()}
-    -Dquarkus.platform.version=${env.quarkusPlatform.version}
-    -Dversion.org.kie.kogito=${env.kogitoRuntime.version}
 `
 );
 
