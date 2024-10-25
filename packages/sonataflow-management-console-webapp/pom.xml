@@ -67,7 +67,7 @@
                 <KIE_TOOLS_BUILD__runTests>false</KIE_TOOLS_BUILD__runTests>
                 <KIE_TOOLS_BUILD__runIntegrationTests>false</KIE_TOOLS_BUILD__runIntegrationTests>
                 <SONATAFLOW_MANAGEMENT_CONSOLE_WEBAPP__sonataflowEnvMode
-                >true</SONATAFLOW_MANAGEMENT_CONSOLE_WEBAPP__sonataflowEnvMode>
+                >PROD</SONATAFLOW_MANAGEMENT_CONSOLE_WEBAPP__sonataflowEnvMode>
               </environmentVariables>
             </configuration>
           </execution>
