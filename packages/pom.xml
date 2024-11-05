@@ -17,7 +17,6 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>maven-base</module>
     <module>sonataflow-quarkus-devui</module>
     <module>sonataflow-management-console-webapp</module>
   </modules>

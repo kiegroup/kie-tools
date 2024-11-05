@@ -31,7 +31,7 @@
 
   <groupId>org.kie</groupId>
   <artifactId>kie-tools-maven-base</artifactId>
-  <version>999-SNAPSHOT</version>
+  <version>${revision}</version>
 
   <modelVersion>4.0.0</modelVersion>
   <name>KIE Tools :: Maven Base</name>
