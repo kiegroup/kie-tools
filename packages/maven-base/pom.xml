@@ -524,48 +524,5 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>reproducible-build</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>reproducible</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-artifact-plugin</artifactId>
-            <configuration />
-            <executions>
-              <execution>
-                <id>check-buildplan</id>
-                <goals>
-                  <goal>check-buildplan</goal>
-                </goals>
-                <!--
-                  The execution's configuration is part of the pluginManagement.
-                  This piece here only makes sure the execution is enabled (by specifying a phase)
-                  for builds with the 'reproducible' profile enabled.
-                -->
-                <phase>validate</phase>
-              </execution>
-              <execution>
-                <id>compare</id>
-                <goals>
-                  <goal>compare</goal>
-                </goals>
-                <!--
-                  The execution's configuration is part of the pluginManagement.
-                  This piece here only makes sure the execution is enabled (by specifying a phase)
-                  for builds with the 'reproducible' profile enabled.
-                -->
-                <phase>install</phase>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
   </profiles>
 </project>
