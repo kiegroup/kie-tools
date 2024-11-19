@@ -171,7 +171,7 @@
       <dependency>
         <groupId>org.drools</groupId>
         <artifactId>drools-bom</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>9.102.redhat-00004</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
