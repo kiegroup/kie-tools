@@ -19,5 +19,6 @@
   <modules>
     <module>sonataflow-quarkus-devui</module>
     <module>sonataflow-management-console-webapp</module>
+    <module>kogito-db-migrator-tool</module>
   </modules>
 </project>

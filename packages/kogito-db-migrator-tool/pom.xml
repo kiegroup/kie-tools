@@ -23,10 +23,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 >
   <parent>
-    <groupId>org.kie</groupId>
-    <artifactId>kie-tools-maven-base</artifactId>
-    <version>${revision}</version>
-    <relativePath>./node_modules/@kie-tools/maven-base/pom.xml</relativePath>
+    <groupId>org.apache.kie.sonataflow</groupId>
+    <artifactId>kie-tools-packages</artifactId>
+    <version>999-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -66,24 +66,32 @@
   <build>
     <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
-      <!-- Use mvn dependency:unpack command to unzip ddl files and mvn dependency:copy to copy into destination -->
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
-        <configuration>
-          <artifactItems>
-            <artifactItem>
-              <groupId>org.kie.kogito</groupId>
-              <artifactId>kogito-ddl</artifactId>
-              <version>${version.org.kie.kogito}</version>
-              <classifier>db-scripts</classifier>
-              <type>zip</type>
-              <overWrite>true</overWrite>
-              <outputDirectory>src/main/resources</outputDirectory>
-              <destFileName>kogito-ddl-db-scripts.zip</destFileName>
-              <excludes>ansi/*</excludes>
-            </artifactItem>
-          </artifactItems>
-        </configuration>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.kie.kogito</groupId>
+                  <artifactId>kogito-ddl</artifactId>
+                  <version>${version.org.kie.kogito}</version>
+                  <classifier>db-scripts</classifier>
+                  <type>zip</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>src/main/resources</outputDirectory>
+                  <destFileName>kogito-ddl-db-scripts.zip</destFileName>
+                  <excludes>ansi/*</excludes>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>io.quarkus</groupId>
@@ -117,6 +125,24 @@
             <phase>prepare-package</phase>
             <goals>
               <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/assembly/image-build-zip.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
             </goals>
           </execution>
         </executions>
