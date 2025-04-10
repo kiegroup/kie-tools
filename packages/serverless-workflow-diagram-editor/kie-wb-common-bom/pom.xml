@@ -60,7 +60,7 @@
   <properties>
     <sonar.skip>true</sonar.skip>
     <j2cl.tools.version>0.4</j2cl.tools.version>
-    <version.deploy.plugin>2.8.2</version.deploy.plugin>
+    <version.deploy.plugin>3.1.2</version.deploy.plugin>
   </properties>
 
   <dependencyManagement>
