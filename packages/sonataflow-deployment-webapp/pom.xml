@@ -48,7 +48,7 @@
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <version.deploy.plugin>2.8.2</version.deploy.plugin>
+    <version.deploy.plugin>3.1.2</version.deploy.plugin>
   </properties>
 
   <dependencies />
