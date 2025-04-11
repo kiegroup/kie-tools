@@ -22,7 +22,7 @@ runs:
   using: "composite"
   steps:
     - name: "Checkout kie-tools @ ${{ inputs.ref }}"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         ref: ${{ inputs.ref }}
         fetch-depth: 0
