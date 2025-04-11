@@ -26,7 +26,7 @@ jobs:
           tag: ${{ github.event.inputs.tag }}
 
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ fromJSON(steps.fetch_release_for_tag.outputs.data).target_commitish }}
 
