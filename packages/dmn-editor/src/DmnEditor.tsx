@@ -59,6 +59,7 @@ import "@kie-tools/dmn-marshaller/dist/kie-extensions"; // This is here because 
 import "./DmnEditor.css"; // Leave it for last, as this overrides some of the PF and RF styles.
 import { Commands, CommandsContextProvider, useCommands } from "./commands/CommandsContextProvider";
 import { DmnEditorSettingsContextProvider } from "./settings/DmnEditorSettingsContext";
+import { JavaCodeCompletionService } from "@kie-tools/import-java-classes-component/dist/components/ImportJavaClasses/services";
 
 const ON_MODEL_CHANGE_DEBOUNCE_TIME_IN_MS = 500;
 
@@ -167,11 +168,23 @@ export type DmnEditorProps = {
    */
   issueTrackerHref?: string;
   /**
+   * A flag to enable 'Evaluation Highlights' on supported channels (only ONLINE for now)
+   */
+  isEvaluationHighlightsSupported?: boolean;
+  /**
    * A flag to enable read-only mode on the DMN Editor.
    * When enabled navigation is still possible (e.g. entering the Boxed Expression Editor, Data Types and Included Models),
    * but no changes can be made and the model itself is unaltered.
    */
   isReadOnly?: boolean;
+  /**
+   * Boolean flag to check whether the "Import DataTypes From JavaClasses" feature is available.
+   */
+  isImportDataTypesFromJavaClassesSupported?: boolean;
+  /**
+   * This object defines all the API methods which ImportJavaClasses component can use to dialog with the Code Completion Extension
+   */
+  javaCodeCompletionService?: JavaCodeCompletionService;
   /**
    * When users want to jump to another file, this method is called, allowing the controller of this component decide what to do.
    * Links are only rendered if this is provided. Otherwise, paths will be rendered as text.
