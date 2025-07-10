@@ -104,7 +104,56 @@ export function getSnappedMultiPointAnchoredEdgePath({
     points[i] = snapPoint(snapGrid, { ...(dmnEdge?.["di:waypoint"] ?? [])[i] });
   }
 
-  return { path: pointsToPath(points), points };
+  const orthogonalPoints = generateOrthogonalPoints(points);
+  return { path: pointsToPath(orthogonalPoints), points: orthogonalPoints };
+}
+
+function generateOrthogonalPoints(originalPoints: DC__Point[]): DC__Point[] {
+  if (originalPoints.length < 2) {
+    return originalPoints;
+  }
+
+  const orthogonalPoints: DC__Point[] = [];
+  orthogonalPoints.push(originalPoints[0]);
+
+  for (let i = 0; i < originalPoints.length - 1; i++) {
+    let currentP = orthogonalPoints[orthogonalPoints.length - 1];
+    const targetP = originalPoints[i + 1];
+
+    // If currentP and targetP are already the same, skip.
+    if (currentP["@_x"] === targetP["@_x"] && currentP["@_y"] === targetP["@_y"]) {
+      continue;
+    }
+
+    // While currentP is not equal to targetP
+    while (currentP["@_x"] !== targetP["@_x"] || currentP["@_y"] !== targetP["@_y"]) {
+      const deltaX = targetP["@_x"] - currentP["@_x"];
+      const deltaY = targetP["@_y"] - currentP["@_y"];
+
+      let nextPoint: DC__Point;
+
+      if (currentP["@_x"] === targetP["@_x"] || currentP["@_y"] === targetP["@_y"]) {
+        // Already aligned horizontally or vertically, move directly to targetP for this segment
+        nextPoint = targetP;
+      } else {
+        // Diagonal segment, needs orthogonalization
+        if (Math.abs(deltaX) >= Math.abs(deltaY)) {
+          // Prefer horizontal move first
+          nextPoint = { "@_x": targetP["@_x"], "@_y": currentP["@_y"] };
+        } else {
+          // Prefer vertical move first
+          nextPoint = { "@_x": currentP["@_x"], "@_y": targetP["@_y"] };
+        }
+      }
+
+      // Add nextPoint only if it's different from currentP
+      if (nextPoint["@_x"] !== currentP["@_x"] || nextPoint["@_y"] !== currentP["@_y"]) {
+        orthogonalPoints.push(nextPoint);
+      }
+      currentP = nextPoint; // Update currentP for the next iteration of the while loop
+    }
+  }
+  return orthogonalPoints;
 }
 
 export function getSnappedHandlePosition(
