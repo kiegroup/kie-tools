@@ -28,7 +28,7 @@ jobs:
         run: git config --system core.longpaths true
 
       - name: "Checkout @ GitHub default"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Checkout @ Simulated squashed-merge if PR"
         id: checkout_pr
@@ -228,7 +228,7 @@ jobs:
 
       - name: "Check tests result (`main` only)"
         if: always() && !cancelled() && steps.setup_build_mode.outputs.mode != 'none'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         env:
           KIE_TOOLS_CI__JUNIT_REPORT_RESULTS_PATTERNS: |-
             ${{ steps.ci_patterns.outputs.tests_reports_patterns }}
