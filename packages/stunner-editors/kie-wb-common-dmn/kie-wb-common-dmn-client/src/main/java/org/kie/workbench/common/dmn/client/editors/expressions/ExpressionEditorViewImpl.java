@@ -155,6 +155,9 @@ public class ExpressionEditorViewImpl implements ExpressionEditorView {
     @DataField("expressionType")
     private Span expressionType;
 
+    @DataField("editExpression")
+    private HTMLButtonElement editExpression;
+
     @DataField("dmn-table")
     private DMNGridPanelContainer gridPanelContainer;
 
@@ -192,6 +195,7 @@ public class ExpressionEditorViewImpl implements ExpressionEditorView {
                                     final Span returnToDRGLabel,
                                     final Span expressionName,
                                     final Span expressionType,
+                                    final HTMLButtonElement editExpression,
                                     final @DMNEditor DMNGridPanelContainer gridPanelContainer,
                                     final TranslationService translationService,
                                     final ListSelectorView.Presenter listSelector,
@@ -211,6 +215,7 @@ public class ExpressionEditorViewImpl implements ExpressionEditorView {
         this.returnToDRGLabel = returnToDRGLabel;
         this.expressionName = expressionName;
         this.expressionType = expressionType;
+        this.editExpression = editExpression;
         this.gridPanelContainer = gridPanelContainer;
         this.translationService = translationService;
         this.listSelector = listSelector;
@@ -680,6 +685,11 @@ public class ExpressionEditorViewImpl implements ExpressionEditorView {
     @EventHandler("returnToDRGLink")
     void onClickReturnToDRGLink(final ClickEvent event) {
         presenter.exit();
+    }
+
+    @EventHandler("editExpression")
+    void onClickEditExpression(final ClickEvent event) {
+        setFocus();
     }
 
     @Override
